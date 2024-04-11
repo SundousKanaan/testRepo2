@@ -15,6 +15,8 @@ p {
   height: 200px;
   width: 400px;
   margin: 20px auto;
+  position: relative;
+
 }
 /* Stijlen voor lichte achtergrond */
 p.background--light {
@@ -23,4 +25,12 @@ p.background--light {
 /* Stijlen voor donkere achtergrond */
 p.background--dark {
   color: red; /* Verander de tekstkleur voor een donkere achtergrond */
+}
+
+
+/* style the draggable cat */
+#draggableImage {
+  width: 100px;  
+  height: auto;
+  cursor: move; 
 }
