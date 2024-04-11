@@ -1,0 +1,26 @@
+/* Standaardstijl voor het tekstelement */
+p {
+  color: red; /* Standaard witte tekstkleur */
+  font-size: 24px;
+  text-align: center;
+  padding: 20px;
+}
+/* Achtergrondstijl voor de thumbnail */
+.thumbnail {
+  background-image: url("https://st4.depositphotos.com/13349494/23275/i/450/depositphotos_232750146-stock-photo-dark-blue-striped-wooden-background.jpg");
+
+  background-image: url("https://www.mflorshop.nl/files/images/webshop/span-class-price-box-gelegd-van-del-89-95-del-br-voor-span-c-1608045139_l.jpg");
+
+  background-size: cover;
+  height: 200px;
+  width: 400px;
+  margin: 20px auto;
+}
+/* Stijlen voor lichte achtergrond */
+p.background--light {
+  color: black; /* Verander de tekstkleur voor een lichte achtergrond */
+}
+/* Stijlen voor donkere achtergrond */
+p.background--dark {
+  color: red; /* Verander de tekstkleur voor een donkere achtergrond */
+}
