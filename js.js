@@ -5,25 +5,36 @@
 
 // Wacht tot het HTML-document volledig is geladen voordat je de code uitvoert
 document.addEventListener("DOMContentLoaded", function () {
+  const lightFunction = () => {
+    console.log("background is light");
+  }
+  const darkFunction = () => {
+    console.log("background is dark");
+  }
   // Initialisatie van BackgroundCheck
   BackgroundCheck.init({
     // Definieer de doelelementen die moeten worden gecontroleerd
-    targets: ".thumbnail",
-    // Debug-modus inschakelen om uitvoer in de console te tonen
-    debug: true,
+    targets: "#draggableImage",
+    images: '.thumbnail',
+    lightFunction: lightFunction,
+    darkFunction: darkFunction
   });
 
 
     const img = document.getElementById('draggableImage');
     const thumbnail = document.querySelector('.thumbnail');
   
+    // store teh mouse position
+    let offsetX, offsetY;
+
     img.addEventListener('dragstart', function (event) {
+      offsetX = event.offsetX;
+      offsetY = event.offsetY;
       event.dataTransfer.setData('text', event.target.id);
-      console.log('dragstart');
     });
-  
+    
     thumbnail.addEventListener('dragover', function (event) {
-      event.preventDefault();  // Necessary to allow dropping
+      event.preventDefault(); 
     });
   
     thumbnail.addEventListener('drop', function (event) {
@@ -32,8 +43,13 @@ document.addEventListener("DOMContentLoaded", function () {
       const draggableElement = document.getElementById(data);
       thumbnail.appendChild(draggableElement);
       draggableElement.style.position = 'absolute';
-      draggableElement.style.top = event.offsetY + 'px';
-      draggableElement.style.left = event.offsetX + 'px';
+    
+      draggableElement.style.left = (event.offsetX - offsetX) + 'px';
+      draggableElement.style.top = (event.offsetY - offsetY) + 'px';
+    
+      // Refresh BackgroundCheck 
+      BackgroundCheck.refresh();
     });
+    
   
 });
