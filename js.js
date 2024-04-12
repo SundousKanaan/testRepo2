@@ -5,51 +5,51 @@
 
 // Wacht tot het HTML-document volledig is geladen voordat je de code uitvoert
 document.addEventListener("DOMContentLoaded", function () {
-  const lightFunction = () => {
+  const lightFunction = (mean) => {
     console.log("background is light");
-  }
-  const darkFunction = () => {
+    console.log(mean);
+  };
+  const darkFunction = (mean) => {
     console.log("background is dark");
-  }
+
+    console.log(mean);
+  };
   // Initialisatie van BackgroundCheck
   BackgroundCheck.init({
     // Definieer de doelelementen die moeten worden gecontroleerd
     targets: "#draggableImage",
-    images: '.thumbnail',
+    images: ".thumbnail",
     lightFunction: lightFunction,
-    darkFunction: darkFunction
+    darkFunction: darkFunction,
   });
 
+  const img = document.getElementById("draggableImage");
+  const thumbnail = document.querySelector(".thumbnail");
 
-    const img = document.getElementById('draggableImage');
-    const thumbnail = document.querySelector('.thumbnail');
-  
-    // store teh mouse position
-    let offsetX, offsetY;
+  // store teh mouse position
+  let offsetX, offsetY;
 
-    img.addEventListener('dragstart', function (event) {
-      offsetX = event.offsetX;
-      offsetY = event.offsetY;
-      event.dataTransfer.setData('text', event.target.id);
-    });
-    
-    thumbnail.addEventListener('dragover', function (event) {
-      event.preventDefault(); 
-    });
-  
-    thumbnail.addEventListener('drop', function (event) {
-      event.preventDefault();
-      const data = event.dataTransfer.getData('text');
-      const draggableElement = document.getElementById(data);
-      thumbnail.appendChild(draggableElement);
-      draggableElement.style.position = 'absolute';
-    
-      draggableElement.style.left = (event.offsetX - offsetX) + 'px';
-      draggableElement.style.top = (event.offsetY - offsetY) + 'px';
-    
-      // Refresh BackgroundCheck 
-      BackgroundCheck.refresh();
-    });
-    
-  
+  img.addEventListener("dragstart", function (event) {
+    offsetX = event.offsetX;
+    offsetY = event.offsetY;
+    event.dataTransfer.setData("text", event.target.id);
+  });
+
+  thumbnail.addEventListener("dragover", function (event) {
+    event.preventDefault();
+  });
+
+  thumbnail.addEventListener("drop", function (event) {
+    event.preventDefault();
+    const data = event.dataTransfer.getData("text");
+    const draggableElement = document.getElementById(data);
+    thumbnail.appendChild(draggableElement);
+    draggableElement.style.position = "absolute";
+
+    draggableElement.style.left = event.offsetX - offsetX + "px";
+    draggableElement.style.top = event.offsetY - offsetY + "px";
+
+    // Refresh BackgroundCheck
+    BackgroundCheck.refresh();
+  });
 });

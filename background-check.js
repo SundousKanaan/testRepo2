@@ -595,10 +595,10 @@
         // classList(target, mean <= (get('threshold') / 100) ? get('classes').dark : get('classes').light, 'add');
         if (mean <= (get('threshold') / 100) && variance <= get('minComplexity') / 100) {
           const darkFunction = get('darkFunction');
-          darkFunction(target);
+          darkFunction(mean);
         } else {
           const lightFunction = get('lightFunction');
-          lightFunction(target);
+          lightFunction(mean);
 
         }
         // if (variance > get('minComplexity') / 100) {
