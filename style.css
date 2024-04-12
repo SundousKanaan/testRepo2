@@ -7,16 +7,17 @@ p {
 }
 /* Achtergrondstijl voor de thumbnail */
 .thumbnail {
-  background-image: url("https://st4.depositphotos.com/13349494/23275/i/450/depositphotos_232750146-stock-photo-dark-blue-striped-wooden-background.jpg");
+  /* background-image: url("https://st4.depositphotos.com/13349494/23275/i/450/depositphotos_232750146-stock-photo-dark-blue-striped-wooden-background.jpg"); */
+  background-image: url("https://images.squarespace-cdn.com/content/v1/62b077c45b464b26b78827b7/1660582578460-RB11CMHXAMJ2Z5UNLYBK/cbdd1-bauwerk-modern-window.jpeg");
 
-  background-image: url("./background.jpg");
+  /* background-image: url("./background.jpg"); */
+  background-image: url("./test.png");
 
-  background-size: cover;
+  background-size: contain;
   height: 300px;
   width: 600px;
   margin: 20px auto;
   position: relative;
-
 }
 /* Stijlen voor lichte achtergrond */
 p.background--light {
@@ -26,7 +27,6 @@ p.background--light {
 p.background--dark {
   color: red; /* Verander de tekstkleur voor een donkere achtergrond */
 }
-
 
 /* style the draggable cat */
 div.img-container {
@@ -38,7 +38,11 @@ div.img-container {
   text-align: center;
 }
 #draggableImage {
-  width: 80px;  
+  width: 80px;
   height: auto;
-  cursor: move; 
+  cursor: move;
 }
+
+/* #video {
+  display: none;
+} */

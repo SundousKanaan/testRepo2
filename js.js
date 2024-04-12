@@ -1,22 +1,16 @@
-// Verwijzing naar de BackgroundCheck-bibliotheek
-// Zorg ervoor dat dit pad correct is naar je background-check.js-bestand
-// Als het zich in dezelfde map bevindt als je script.js, laat het dan zoals het is
-// Anders moet je het juiste pad specificeren
-
-// Wacht tot het HTML-document volledig is geladen voordat je de code uitvoert
+// Wait for the HTML document to fully load before running the code
 document.addEventListener("DOMContentLoaded", function () {
   const lightFunction = (mean) => {
-    console.log("background is light");
-    console.log(mean);
+    let Lighting = mean.toFixed(2);
+    console.log("background is light", { Lighting });
   };
   const darkFunction = (mean) => {
-    console.log("background is dark");
-
-    console.log(mean);
+    let Darkness = mean.toFixed(2);
+    console.log("background is dark", { Darkness });
   };
-  // Initialisatie van BackgroundCheck
+  // Initialization of BackgroundCheck
   BackgroundCheck.init({
-    // Definieer de doelelementen die moeten worden gecontroleerd
+    // Define the target element to be checked
     targets: "#draggableImage",
     images: ".thumbnail",
     lightFunction: lightFunction,
@@ -26,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const img = document.getElementById("draggableImage");
   const thumbnail = document.querySelector(".thumbnail");
 
-  // store teh mouse position
+  // store the mouse position
   let offsetX, offsetY;
 
   img.addEventListener("dragstart", function (event) {
@@ -52,4 +46,34 @@ document.addEventListener("DOMContentLoaded", function () {
     // Refresh BackgroundCheck
     BackgroundCheck.refresh();
   });
+});
+
+const video = document.getElementById("video");
+const canvas = document.getElementById("canvas");
+const photo = document.getElementById("photo");
+const captureBtn = document.getElementById("captureBtn");
+
+// Vraag toestemming voor toegang tot de camera
+navigator.mediaDevices
+  .getUserMedia({
+    video: {
+      facingMode: { exact: "environment" }, // Gebruik alleen de achterste camera
+    },
+  })
+  .then(function (stream) {
+    // Toon de camerastream in de videotag
+    video.srcObject = stream;
+  })
+  .catch(function (err) {
+    console.error("Geen toegang tot de camera: ", err);
+  });
+
+// Wanneer de gebruiker op de knop klikt, maak dan een foto
+captureBtn.addEventListener("click", function () {
+  // Teken het huidige frame van de videostream op het canvas
+  canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
+  // Zet de afbeeldingsgegevens van het canvas om naar een afbeelding URL
+  const imgURL = canvas.toDataURL("image/png");
+  // Toon de genomen foto in de afbeeldingstag
+  photo.src = imgURL;
 });
