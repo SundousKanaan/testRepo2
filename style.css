@@ -8,10 +8,11 @@ p {
 /* Achtergrondstijl voor de thumbnail */
 .thumbnail {
   /* background-image: url("https://st4.depositphotos.com/13349494/23275/i/450/depositphotos_232750146-stock-photo-dark-blue-striped-wooden-background.jpg"); */
-  background-image: url("https://images.squarespace-cdn.com/content/v1/62b077c45b464b26b78827b7/1660582578460-RB11CMHXAMJ2Z5UNLYBK/cbdd1-bauwerk-modern-window.jpeg");
+  /* background-image: url("https://images.squarespace-cdn.com/content/v1/62b077c45b464b26b78827b7/1660582578460-RB11CMHXAMJ2Z5UNLYBK/cbdd1-bauwerk-modern-window.jpeg"); */
 
+  --bg: url("./background.jpg");
   /* background-image: url("./background.jpg"); */
-  background-image: url("./test.png");
+  background-image: var(--bg);
 
   background-size: contain;
   height: 300px;

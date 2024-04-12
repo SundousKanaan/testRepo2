@@ -55,11 +55,7 @@ const captureBtn = document.getElementById("captureBtn");
 
 // Vraag toestemming voor toegang tot de camera
 navigator.mediaDevices
-  .getUserMedia({
-    video: {
-      facingMode: { exact: "environment" }, // Gebruik alleen de achterste camera
-    },
-  })
+  .getUserMedia({ video: true })
   .then(function (stream) {
     // Toon de camerastream in de videotag
     video.srcObject = stream;
@@ -76,4 +72,6 @@ captureBtn.addEventListener("click", function () {
   const imgURL = canvas.toDataURL("image/png");
   // Toon de genomen foto in de afbeeldingstag
   photo.src = imgURL;
+
+  thumbnail.style.setProperty = ("--bg", "url(" + imgURL + ")");
 });
