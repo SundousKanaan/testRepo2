@@ -22,19 +22,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // store the mouse position
   let offsetX, offsetY;
-  function moveElement(event) {
-    let clientX = event.clientX || event.touches[0].clientX;
-    let clientY = event.clientY || event.touches[0].clientY;
-
-    img.style.position = 'absolute';
-    img.style.left = clientX - offsetX + 'px';
-    img.style.top = clientY - offsetY + 'px';
-    thumbnail.appendChild(img);
-
-    // Refresh BackgroundCheck
-    BackgroundCheck.refresh();
-  }
-
 
   img.addEventListener("dragstart", function (event) {
     offsetX = event.offsetX;
@@ -46,18 +33,21 @@ document.addEventListener("DOMContentLoaded", function () {
     event.preventDefault();
   });
 
-  thumbnail.addEventListener("drop", moveElement);
-img.addEventListener('touchstart', function(event) {
-  offsetX = event.touches[0].pageX - img.offsetLeft;
-  offsetY = event.touches[0].pageY - img.offsetTop;
-  event.preventDefault(); // Prevent scrolling when touching the image
+  thumbnail.addEventListener("drop", function (event) {
+    event.preventDefault();
+    const data = event.dataTransfer.getData("text");
+    const draggableElement = document.getElementById(data);
+    thumbnail.appendChild(draggableElement);
+    draggableElement.style.position = "absolute";
+
+    draggableElement.style.left = event.offsetX - offsetX + "px";
+    draggableElement.style.top = event.offsetY - offsetY + "px";
+
+    // Refresh BackgroundCheck
+    BackgroundCheck.refresh();
+  });
 });
 
-img.addEventListener('touchmove', moveElement);
-
-img.addEventListener('touchend', function() {
-  img.removeEventListener('touchmove', moveElement);
-});
 const video = document.getElementById("video");
 const canvas = document.getElementById("canvas");
 const photo = document.getElementById("photo");
