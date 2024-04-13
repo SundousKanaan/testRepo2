@@ -1,12 +1,18 @@
 // Wait for the HTML document to fully load before running the code
+const pElement = document.querySelector("p");
+
 document.addEventListener("DOMContentLoaded", function () {
   const lightFunction = (mean) => {
     let Lighting = mean.toFixed(2);
     console.log("background is light", { Lighting });
+    pElement.classList.add("background--light");
+    pElement.classList.remove("background--dark");
   };
   const darkFunction = (mean) => {
     let Darkness = mean.toFixed(2);
     console.log("background is dark", { Darkness });
+    pElement.classList.add("background--dark");
+    pElement.classList.remove("background--light");
   };
   // Initialization of BackgroundCheck
   BackgroundCheck.init({
@@ -43,6 +49,15 @@ document.addEventListener("DOMContentLoaded", function () {
     draggableElement.style.left = event.offsetX - offsetX + "px";
     draggableElement.style.top = event.offsetY - offsetY + "px";
 
+    // Initialization of BackgroundCheck
+    BackgroundCheck.init({
+      // Define the target element to be checked
+      targets: "#draggableImage",
+      images: ".thumbnail",
+      lightFunction: lightFunction,
+      darkFunction: darkFunction,
+    });
+
     // Refresh BackgroundCheck
     BackgroundCheck.refresh();
   });
@@ -52,10 +67,16 @@ const video = document.getElementById("video");
 const canvas = document.getElementById("canvas");
 const photo = document.getElementById("photo");
 const captureBtn = document.getElementById("captureBtn");
+const thumbnail = document.querySelector(".thumbnail");
 
 // Vraag toestemming voor toegang tot de camera
 navigator.mediaDevices
-  .getUserMedia({ video: true })
+  // .getUserMedia({ video: true })
+  .getUserMedia({
+    video: {
+      facingMode: { exact: "environment" }, // Gebruik alleen de achterste camera
+    },
+  })
   .then(function (stream) {
     // Toon de camerastream in de videotag
     video.srcObject = stream;
@@ -73,5 +94,8 @@ captureBtn.addEventListener("click", function () {
   // Toon de genomen foto in de afbeeldingstag
   photo.src = imgURL;
 
-  thumbnail.style.setProperty = ("--bg", "url(" + imgURL + ")");
+  // Pas de achtergrond van de thumbnail aan met de vastgelegde afbeelding
+  thumbnail.style.backgroundImage = "url(" + imgURL + ")";
+  // Refresh BackgroundCheck
+  BackgroundCheck.refresh();
 });
