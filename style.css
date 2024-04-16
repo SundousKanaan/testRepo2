@@ -10,19 +10,11 @@ p {
 .thumbnail {
   background-image: url("./background.jpg"); /* Standaard achtergrondafbeelding */
   background-size: cover;
-  height: 300px;
-  width: 600px;
+  background-position: center;
+  width: auto;
+  height: 40vh;
   margin: 20px auto;
   position: relative;
-}
-
-/* Stijlen voor lichte achtergrond */
-p.background--light {
-  color: black; /* Verander de tekstkleur voor een lichte achtergrond */
-}
-/* Stijlen voor donkere achtergrond */
-p.background--dark {
-  color: blue; /* Verander de tekstkleur voor een donkere achtergrond */
 }
 
 /* style the draggable cat */
@@ -34,12 +26,29 @@ div.img-container {
   background-color: antiquewhite;
   text-align: center;
 }
-#draggableImage {
+/* #draggableImage {
   width: 80px;
   height: auto;
   cursor: move;
+} */
+
+#draggableImage {
+  background-image: url("./hover.png");
+  background-size: cover;
+  width: 80px;
+  height: 80px;
+  position: relative;
+  cursor: move;
 }
 
-/* #video {
+#video,
+#photo {
+  width: 15rem;
+  height: 10rem;
+}
+
+#canvas {
   display: none;
-} */
+  width: 640px;
+  height: 480px;
+}

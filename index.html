@@ -13,14 +13,17 @@
 
     <!-- cute cat image used to hover on other elements -->
     <div class="img-container">
-      <img src="hover.png" id="draggableImage" draggable="true" />
+      <!-- <img src="hover.png" id="draggableImage" draggable="true" /> -->
+      <div id="draggableImage" draggable="true"></div>
     </div>
     <!-- Een thumbnail met een achtergrondafbeelding -->
     <div class="thumbnail"></div>
-    <video id="video" width="640" height="480" autoplay></video>
-    <button id="captureBtn">Maak Foto</button>
-    <canvas id="canvas" width="640" height="480" style="display: none"></canvas>
+
+    <video id="video" autoplay></video>
+    <canvas id="canvas"></canvas>
     <img id="photo" src="#" alt="Jouw Foto" />
+
+    <button id="captureBtn">Maak Foto</button>
 
     <script type="text/javascript" src="./js.js"></script>
   </body>

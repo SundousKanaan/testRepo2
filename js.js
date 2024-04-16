@@ -5,15 +5,15 @@ document.addEventListener("DOMContentLoaded", function () {
   const lightFunction = (mean) => {
     let Lighting = mean.toFixed(2);
     console.log("background is light", { Lighting });
-    pElement.classList.add("background--light");
-    pElement.classList.remove("background--dark");
+    pElement.textContent = `Lighting: ${Lighting}`;
   };
+
   const darkFunction = (mean) => {
     let Darkness = mean.toFixed(2);
     console.log("background is dark", { Darkness });
-    pElement.classList.add("background--dark");
-    pElement.classList.remove("background--light");
+    pElement.textContent = `Darkness: ${Darkness}`;
   };
+
   // Initialization of BackgroundCheck
   BackgroundCheck.init({
     // Define the target element to be checked
@@ -30,9 +30,12 @@ document.addEventListener("DOMContentLoaded", function () {
   let offsetX, offsetY;
 
   img.addEventListener("dragstart", function (event) {
+    // img.addEventListener("touchstart", function (event) {
+    // event.preventDefault();
+    console.log("touchstart");
     offsetX = event.offsetX;
     offsetY = event.offsetY;
-    event.dataTransfer.setData("text", event.target.id);
+    // event.dataTransfer.setData("text", event.target.id);
   });
 
   thumbnail.addEventListener("dragover", function (event) {
@@ -41,13 +44,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   thumbnail.addEventListener("drop", function (event) {
     event.preventDefault();
-    const data = event.dataTransfer.getData("text");
-    const draggableElement = document.getElementById(data);
-    thumbnail.appendChild(draggableElement);
-    draggableElement.style.position = "absolute";
+    // const data = event.dataTransfer.getData("text");
+    // const draggableElement = document.getElementById(data);
+    thumbnail.appendChild(img);
+    // img.style.position = "absolute";
 
-    draggableElement.style.left = event.offsetX - offsetX + "px";
-    draggableElement.style.top = event.offsetY - offsetY + "px";
+    // img.style.left = event.offsetX - offsetX + "px";
+    // img.style.top = event.offsetY - offsetY + "px";
 
     // Initialization of BackgroundCheck
     BackgroundCheck.init({
@@ -71,12 +74,12 @@ const thumbnail = document.querySelector(".thumbnail");
 
 // Vraag toestemming voor toegang tot de camera
 navigator.mediaDevices
-  // .getUserMedia({ video: true })
-  .getUserMedia({
-    video: {
-      facingMode: { exact: "environment" }, // Gebruik alleen de achterste camera
-    },
-  })
+  .getUserMedia({ video: true })
+  // .getUserMedia({
+  //   video: {
+  //     facingMode: { exact: "environment" }, // Gebruik alleen de achterste camera
+  //   },
+  // })
   .then(function (stream) {
     // Toon de camerastream in de videotag
     video.srcObject = stream;
@@ -96,6 +99,4 @@ captureBtn.addEventListener("click", function () {
 
   // Pas de achtergrond van de thumbnail aan met de vastgelegde afbeelding
   thumbnail.style.backgroundImage = "url(" + imgURL + ")";
-  // Refresh BackgroundCheck
-  BackgroundCheck.refresh();
 });
